@@ -2,6 +2,8 @@ import {
   Controller,
   Get,
   Post,
+  Delete,
+  Param,
   Body
 } from '@nestjs/common';
 
@@ -14,13 +16,18 @@ export class TodosController {
   constructor(private service: TodosService) { }
 
   @Get()
-  get(todo) {
+  get() {
     return this.service.allTodos();
   }
   
   @Post()
   create(@Body() todo: Todo) {
-    return this.service.createTodo(todo);
+    this.service.createTodo(todo);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: number){
+    this.service.deleteTodo(id);
   }
   
 }

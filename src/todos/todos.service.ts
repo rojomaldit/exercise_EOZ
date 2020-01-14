@@ -17,4 +17,8 @@ export class TodosService {
   createTodo(todo): Promise<Todo> {
     return this.todosRepository.save(todo)
   }
+
+  deleteTodo(id: number): void {
+    this.todosRepository.delete(id)
+  }
 }
