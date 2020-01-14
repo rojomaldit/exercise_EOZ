@@ -4,5 +4,4 @@
 
 export class CreateListDto {
     description: string;
-    deleted?: number;
 }
