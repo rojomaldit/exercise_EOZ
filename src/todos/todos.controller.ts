@@ -14,14 +14,13 @@ export class TodosController {
   constructor(private service: TodosService) { }
 
   @Get()
-  get() {
-    return this.service.showTodos();
+  get(todo) {
+    return this.service.allTodos();
   }
   
-  /*
   @Post()
   create(@Body() todo: Todo) {
-      return this.service.getTodos(todo);
+    return this.service.createTodo(todo);
   }
-  */
+  
 }
