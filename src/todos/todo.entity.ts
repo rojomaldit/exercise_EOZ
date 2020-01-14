@@ -9,6 +9,6 @@ export class Todo {
   @Column({ length: 100 })
   description:string;
 
-  @Column() 
-  deleted:number;
+  @Column("int", {default: 0}) 
+  deleted?:number;
 }
