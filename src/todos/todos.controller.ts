@@ -15,20 +15,24 @@ export class TodosController {
   constructor(private service: TodosService) { }
 
   @Get()
-  get() {
+  getAll() {
     var a = this.service.allTodos()
     return a
   }
   
   @Post()
   create(@Body() todo: Todo) {
-    console.log("Me llamaste!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     this.service.createTodo(todo);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number){
+  deleteOne(@Param('id') id: number){
     this.service.deleteTodo(id);
+  }
+
+  @Delete()
+  deleteAll(){
+    this.service.deleteAll();
   }
   
 }
