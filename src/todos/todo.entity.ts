@@ -10,5 +10,5 @@ export class Todo {
   description:string;
 
   @Column("int", {default: 0}) 
-  deleted?:number;
+  deleted:boolean;
 }

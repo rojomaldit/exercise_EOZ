@@ -12,12 +12,13 @@ import { Todo } from './todo.entity';
 
 @Controller('todo')
 export class TodosController {
-
   constructor(private service: TodosService) { }
 
   @Get()
   get() {
-    return this.service.allTodos();
+    var a = this.service.allTodos()
+    
+    return a
   }
   
   @Post()

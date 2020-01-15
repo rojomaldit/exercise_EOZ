@@ -10,8 +10,8 @@ export class TodosService {
     @InjectRepository(Todo) 
     private readonly todosRepository: Repository<Todo>) { }
 
-  allTodos(): Promise<Todo[]> {
-    return this.todosRepository.find();
+  async allTodos(): Promise<Todo[]> {
+    return this.todosRepository.find({'deleted': false})
   }
 
   createTodo(todo): Promise<Todo> {
