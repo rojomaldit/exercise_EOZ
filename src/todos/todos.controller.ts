@@ -15,9 +15,8 @@ export class TodosController {
   constructor(private service: TodosService) { }
 
   @Get()
-  get() {
+  getAll() {
     var a = this.service.allTodos()
-    
     return a
   }
   
@@ -27,8 +26,13 @@ export class TodosController {
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number){
+  deleteOne(@Param('id') id: number){
     this.service.deleteTodo(id);
+  }
+
+  @Delete()
+  deleteAll(){
+    this.service.deleteAll();
   }
   
 }

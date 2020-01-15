@@ -2,8 +2,6 @@
 
 ```bash
 npm install
-npm install -g @nestjs/cli
-npm install class-transformer
 npm install --save @nestjs/typeorm typeorm mysql
 npm install bootstrap
 ```
@@ -34,8 +32,11 @@ http://localhost:3000/todo/
 # See all TODOs (GET)
 http://localhost:3000/todo/
 
-# delete TODO (DELETE)
+# delete one TODO (DELETE)
 http://localhost:3000/todo/id/
+
+# delete all TODOs (DELETE)
+http://localhost:3000/todo/
 
 ```
 

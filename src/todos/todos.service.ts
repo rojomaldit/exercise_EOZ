@@ -21,4 +21,8 @@ export class TodosService {
   deleteTodo(id: number): void {
     this.todosRepository.delete(id)
   }
+
+  deleteAll(): void {
+    this.todosRepository.clear()
+  }
 }
