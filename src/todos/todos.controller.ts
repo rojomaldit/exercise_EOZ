@@ -17,12 +17,12 @@ export class TodosController {
   @Get()
   get() {
     var a = this.service.allTodos()
-    
     return a
   }
   
   @Post()
   create(@Body() todo: Todo) {
+    console.log("Me llamaste!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     this.service.createTodo(todo);
   }
 
