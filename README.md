@@ -2,8 +2,7 @@
 
 ```bash
 npm install
-npm install --save @nestjs/typeorm typeorm mysql
-npm install bootstrap
+
 ```
 
 ## Default database
@@ -24,15 +23,18 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## end-points for Postman
+## end-points
 ```bash
-# Add todo (POST)
+# Add TODO (POST)
+http://localhost:3000/todo/
+{
+	"description": "mensaje"
+}
+
+# See all TODO (GET)
 http://localhost:3000/todo/
 
-# See all TODOs (GET)
-http://localhost:3000/todo/
-
-# delete one TODO (DELETE)
+# delete TODO (DELETE)
 http://localhost:3000/todo/id/
 
 # delete all TODOs (DELETE)
