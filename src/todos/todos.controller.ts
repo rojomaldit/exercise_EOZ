@@ -16,18 +16,18 @@ export class TodosController {
   constructor(private service: TodosService) { }
 
   @Get()
-  async getAll() {
-    return await this.service.allTodos()
+  getAll() {
+    return this.service.allTodos()
   }
   
   @Post()
-  async create(@Body() todo: Todo) {
-    await this.service.createTodo(todo);
+  create(@Body() todo: Todo) {
+    this.service.createTodo(todo);
   }
 
   @Delete(':id')
-  async deleteOne(@Param('id') id: number){
-    await this.service.deleteTodo(id);
+  deleteOne(@Param('id') id: number){
+    this.service.deleteTodo(id);
   }
 
   @Delete()
