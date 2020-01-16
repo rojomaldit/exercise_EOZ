@@ -11,15 +11,18 @@ export class TodosService {
     private readonly todosRepository: Repository<Todo>) { }
 
   async allTodos(): Promise<Todo[]> {
-    return this.todosRepository.find({'deleted': false})
+    return this.todosRepository.find({'deleted': 0})
   }
 
   createTodo(todo): Promise<Todo> {
     return this.todosRepository.save(todo)
   }
 
-  deleteTodo(id: number): void {
-    this.todosRepository.delete(id)
+  async deleteTodo(id: number): Promise<Todo[]> {
+    let todo = await this.todosRepository.findOne(id);
+    todo.deleted = 1;
+    await this.todosRepository.save(todo);
+    return null;
   }
 
   deleteAll(): void {

@@ -9,30 +9,30 @@ import {
 
 import { TodosService } from './todos.service';
 import { Todo } from './todo.entity';
+import { stringify } from 'querystring';
 
 @Controller('todo')
 export class TodosController {
   constructor(private service: TodosService) { }
 
   @Get()
-  getAll() {
-    var a = this.service.allTodos()
-    return a
+  async getAll() {
+    return await this.service.allTodos()
   }
   
   @Post()
-  create(@Body() todo: Todo) {
-    this.service.createTodo(todo);
+  async create(@Body() todo: Todo) {
+    await this.service.createTodo(todo);
   }
 
   @Delete(':id')
-  deleteOne(@Param('id') id: number){
-    this.service.deleteTodo(id);
+  async deleteOne(@Param('id') id: number){
+    await this.service.deleteTodo(id);
   }
 
   @Delete()
-  deleteAll(){
-    this.service.deleteAll();
+  async deleteAll(){
+    await this.service.deleteAll();
   }
   
 }
