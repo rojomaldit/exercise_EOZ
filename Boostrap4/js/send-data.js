@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $("#ajaxSubmit").click(function (){
+  $("#ajaxSubmit").click(function post(){
     $.ajax({
       url: 'http://localhost:3000/todo/',
       type: 'POST',
@@ -11,49 +11,43 @@ $(document).ready(function () {
       type: 'GET',
       dataType: 'json',
       success: function (response) {
-
+    
         var length = response.length
         var id = response[length-1].id
         var e = response[length-1].description
         var element = document.getElementById("TODOs");
-
+    
         element.insertAdjacentHTML(
           'afterbegin',
-          '<button id="todo_block_btn" onclick="ajaxDelete('+ id +')" class="btn btn-outline-primary col-md-2">Delete</button>'
+          '<button id="btn_block'+id+'" onclick="ajaxDelete('+ id +')" class="btn btn-outline-primary col-md-2">Delete</button>'
         );
         element.insertAdjacentHTML(
           "afterbegin", 
-          '<div id="todo_block_des" class="col-4 col-md-8">' + e + '</div>'
+          '<div id="des_block'+id+'" class="col-4 col-md-8">' + e + '</div>'
         );
         element.insertAdjacentHTML(
           "afterbegin",
-          '<div id="todo_block_spc" class="w-100 py-1"></div>'
+          '<div id="spc_block'+id+'" class="w-100 py-1"></div>'
         );
       }
     });
   });
 })
 
-//onclick="axajDelete(' + id + ')"
-
 function ajaxDelete(id){
-    console.log("asd")
-    $.ajax({
-      url: 'http://localhost:3000/todo/' + id + '/',
-      type: 'DELETE',
-      dataType: 'json',
-      success: function (response) {
-        console.log(response)
-      }
-    });
-    var btn = document.getElementById("todo_block_btn");
-    var div_des = document.getElementById("todo_block_des");
-    var div_spc = document.getElementById("todo_block_spc");
+  $.ajax({
+    url: 'http://localhost:3000/todo/' + id + '/',
+    type: 'DELETE',
+    dataType: 'json',
+    success: function (response) {
+      console.log(response)
+    }
+  });
+  var btn = document.getElementById("btn_block"+id);
+  var des = document.getElementById("des_block"+id);
+  var spc = document.getElementById("spc_block"+id);
 
-    console.log(btn, div_des, div_spc)
-    btn.remove()
-    div_des.remove()
-    div_spc.remove()
-
-    
+  btn.remove()
+  des.remove()
+  spc.remove()
 }

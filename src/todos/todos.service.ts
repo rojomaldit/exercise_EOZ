@@ -10,7 +10,7 @@ export class TodosService {
     @InjectRepository(Todo) 
     private readonly todosRepository: Repository<Todo>) { }
 
-  async allTodos(): Promise<Todo[]> {
+  allTodos(): Promise<Todo[]> {
     return this.todosRepository.find({'deleted': 0})
   }
 
@@ -19,7 +19,7 @@ export class TodosService {
   }
 
   async deleteTodo(id: number): Promise<Todo[]> {
-    let todo = await this.todosRepository.findOne(id);
+    let todo = await this.todosRepository.findOneOrFail({'id': id});
     todo.deleted = 1;
     await this.todosRepository.save(todo);
     return null;
