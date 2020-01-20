@@ -1,42 +1,30 @@
 $(document).ready(function () {
-  $("#ajaxSubmit").click(function post(){
+  $("#ajaxSubmit").click(function (){
     $.ajax({
       url: 'http://localhost:3000/todo/',
       type: 'POST',
       data: {"description": $("#Add_TODO").val()},
       dataType: 'json'
-    });
-    $.ajax({
-      url: 'http://localhost:3000/todo/',
-      type: 'GET',
-      dataType: 'json',
-      success: function (response) {
-        console.log(response)
-      }
     })
-    .then(function (response){
-      var length = response.length
-      var id = response[length-1].id
-      var e = response[length-1].description
-      var element = document.getElementById("TODOs");
-  
-      element.insertAdjacentHTML(
-        'afterbegin',
-        '<button id="btn_block'+id+'" onclick="ajaxDelete('+ id +')" class="btn btn-outline-primary col-md-2">Delete</button>'
-      );
-      element.insertAdjacentHTML(
-        "afterbegin", 
-        '<div id="des_block'+id+'" class="col-4 col-md-8">' + e + '</div>'
-      );
-      element.insertAdjacentHTML(
-        "afterbegin",
-        '<div id="spc_block'+id+'" class="w-100 py-1"></div>'
-      );
-    })
+    .then(addTodo())
   });
 })
 
-function ajaxDelete(id){
+function addTodo(){
+  var element = document.getElementById("TODOs");
+  var description = $("#Add_TODO").val();
+
+  $.ajax({
+    url: 'http://localhost:3000/todo/',
+    type: 'GET',
+    dataType: 'json'
+  })
+  .then(function (response){
+    insertHTML(response.length + 1, description);
+  })
+}
+
+function deleteTodo(id){
   $.ajax({
     url: 'http://localhost:3000/todo/' + id + '/',
     type: 'DELETE',
@@ -52,4 +40,33 @@ function ajaxDelete(id){
   btn.remove()
   des.remove()
   spc.remove()
+}
+
+function addTodos(){
+  $.ajax({
+    url: 'http://localhost:3000/todo/',
+    type: 'GET',
+    dataType: 'json'
+  })
+  .then(function (response){
+    response.forEach(todo => {
+      insertHTML(todo.id, todo.description)
+    });
+  })
+}
+
+function insertHTML(id, description){
+  var element = document.getElementById("TODOs");
+  element.insertAdjacentHTML(
+    'afterbegin',
+    '<button id="btn_block' + id + '" onclick="deleteTodo(' + id + ')" class="btn btn-outline-primary col-md-2">Delete</button>'
+  );
+  element.insertAdjacentHTML(
+    "afterbegin", 
+    '<div id="des_block'+ id + '" class="col-4 col-md-8">' + description + '</div>'
+  );
+  element.insertAdjacentHTML(
+    "afterbegin",
+    '<div id="spc_block' + id + '" class="w-100 py-1"></div>'
+  );
 }
