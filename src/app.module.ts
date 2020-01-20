@@ -19,7 +19,6 @@ import { Todo } from './todos/todo.entity';
       entities: [Todo],
       synchronize: true,
     }),
-    TodosModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -3,6 +3,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Todo } from './todo.entity';
+import e = require('express');
 
 @Injectable()
 export class TodosService {
@@ -14,8 +15,10 @@ export class TodosService {
     return this.todosRepository.find({'deleted': 0})
   }
 
-  createTodo(todo): Promise<Todo> {
-    return this.todosRepository.save(todo)
+  async createTodo(todo): Promise<Todo> {
+    var elems = await this.todosRepository.find();
+    elems.forEach(e => { if(e.id == todo.id) return null });
+    return this.todosRepository.save(todo);
   }
 
   async deleteTodo(id: number): Promise<Todo[]> {
