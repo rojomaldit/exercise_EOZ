@@ -20,7 +20,7 @@ function addTodo(){
   })
   .then(function (response){
     var len = response.length + 1;
-    console.log(len)
+    
     element.insertAdjacentHTML(
       'afterbegin',
       '<button id="btn_block' + len + '" onclick="deleteTodo(' + len + ')" class="btn btn-outline-primary col-md-2">Delete</button>'
@@ -64,7 +64,7 @@ function addTodos(){
     }
   })
   .then(function (response){
-    
+
     var element = document.getElementById("TODOs");
 
     response.forEach(todo => {
