@@ -1,12 +1,16 @@
 $(document).ready(function () {
   $("#ajaxSubmit").click(function (){
-    $.ajax({
-      url: 'http://localhost:3000/todo/',
-      type: 'POST',
-      data: {"description": $("#Add_TODO").val()},
-      dataType: 'json'
-    })
-    .then(addTodo())
+    var description = $("#Add_TODO").val();
+    if(description == "") alert("No null todo");
+    else {
+      $.ajax({
+        url: 'http://localhost:3000/todo/',
+        type: 'POST',
+        data: {"description": description},
+        dataType: 'json'
+      })
+      .then(addTodo())
+    }
   });
 })
 
